@@ -1,0 +1,88 @@
+
+*{
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}.est{
+    padding-top: 40px;
+    width: 40%;
+}
+.Trusted h1{
+    padding-top: 40px;
+    font-size: 35px;
+} 
+.gallery-item-about{
+    padding-left: 970px;
+    margin-top: -240px;
+}
+.first_about{
+    border-radius: 1px;
+    border-color: cornflowerblue;
+    border-style: solid;
+    background-color: cornflowerblue;
+}
+.main{
+    padding-top: 30px;
+}
+.article_about{
+    padding-top: 40px;
+}
+.class_why{
+    padding-left: 540px;
+    margin-top: -390px;
+    width: 100%;
+}
+.class_intro_why{
+    padding-top: 40px;
+    width: 95.5%;
+    font-size: 14px;
+}
+.art_why{
+    font-size: 20px;
+}
+.class_Partner{
+    padding-top: 130px;
+
+}
+.event_management{
+    font-size: x-large;
+    padding-left: 220px;
+}
+
+.event_adv_manag{
+    font-size: small;
+    margin-top: 25px;
+}
+     .button_about{
+      color: black;
+      font-size: 45px;
+     }
+     .about_button button a{
+      text-decoration: none;
+      color: black;
+      font-size: 40px;
+     }
+     .button_about {
+    border-radius: 15px;  
+    border-color: whitesmoke; 
+    font-size: 18px;       
+    height: 50px; 
+    width: 130px;    
+       
+}
+.about_button{
+    padding-top: 20px;
+    padding-left: 650px;
+}
+  .button_about:hover{
+      cursor: pointer;
+      background-color: hotpink;
+      border-color: hotpink;
+      transition: background-color 0.5s;
+     }
+   .last_of_about{
+    height: 100%;
+    width: 100%;
+    background-color: cornflowerblue;
+    padding-left: 36.5%;
+   }  
