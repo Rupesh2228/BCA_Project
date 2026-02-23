@@ -47,8 +47,8 @@ nav a:hover::after{
   width: 100%;
 }
 .link{
-    padding-left: 850px;
-    margin-top: -10px;
+    padding-left: 780px;
+    margin-top: -70px;
 }
 .logo a{
     text-decoration: none;
@@ -65,12 +65,12 @@ nav a:hover::after{
     margin-left: 350px;
    }
    .Nepal{
-    color: whitesmoke;
+    color: black;
    }
    section{
     height: 400px;
     width: 100%;
-    background-color: #0d3466;
+    background-color: blue;
     margin-top: 235px;
    
    }
@@ -125,7 +125,7 @@ nav a:hover::after{
       padding-left: 140px;
      }
      article{
-      background-color: red;
+      background-color: blue;
       height: 400px;
       width: 100%;
       margin-top: 315px;

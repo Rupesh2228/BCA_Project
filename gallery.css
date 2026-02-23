@@ -4,7 +4,48 @@ div.gallery {
   flex-wrap: wrap;
   justify-content: flex-start;
 }
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+}
 
+.logo h1{
+  font-family: 'Courier New', monospace;
+  font-size: 2em;
+  font-weight: bold;
+  color: #767aa8;
+}
+
+
+nav a{
+  color: #0d3466;
+  text-decoration: none;
+  margin-left: 25px;
+  position: relative;
+  font-size: 20px;
+}
+
+
+nav a::after{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background-color: #0d3466;
+  transition: 0.4s;
+}
+
+nav a:hover::after{
+  width: 100%;
+}
+.link{
+    padding-left: 780px;
+    margin-top: -70px;
+}
 div.gallery-item {
   margin: 5px;
   border: 1px solid #ccc;
