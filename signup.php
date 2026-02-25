@@ -1,46 +1,42 @@
 <?php
+session_start();
 include 'connection.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $uname = $_POST['txt'];
-    $email = $_POST['email'];
-    $pass  = password_hash($_POST['pswd'], PASSWORD_DEFAULT);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = trim($_POST['email']);
+    $password = trim($_POST['pswd']);
 
-    // Check if email already exists
-    $check = $conn->prepare("SELECT id FROM users WHERE email=?");
-    if (!$check) {
-        header("Location: login_signup.php?status=error");
+    // Check if user exists
+    $stmt = $conn->prepare("SELECT id, password FROM users WHERE email=?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows == 0) {
+        echo "<script>
+                alert('No user found with that email.');
+                window.location.href='landingpage.html';
+              </script>";
         exit;
     }
-    $check->bind_param("s", $email);
-    $check->execute();
-    $result = $check->get_result();
 
-    if ($result && $result->num_rows > 0) {
-        $check->close();
-        $conn->close();
-        header("Location: login_signup.php?status=exists");
-        exit;
-    }
-    $check->close();
+    $stmt->bind_result($id, $hashedPassword);
+    $stmt->fetch();
 
-    // Insert new user
-    $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-    if (!$stmt) {
-        header("Location: login_signup.php?status=error");
-        exit;
-    }
-    $stmt->bind_param("sss", $uname, $email, $pass);
-
-    if ($stmt->execute()) {
-        $stmt->close();
-        $conn->close();
-        header("Location: login_signup.php?status=signup_success");
+    if (password_verify($password, $hashedPassword)) {
+        $_SESSION['user_id'] = $id;
+        echo "<script>
+                alert('Login successful! Redirecting to landing page...');
+                window.location.href='landingpage.html';
+              </script>";
     } else {
-        $stmt->close();
-        $conn->close();
-        header("Location: login_signup.php?status=error");
+        echo "<script>
+                alert('Invalid password. Please try again.');
+                window.location.href='landingpage.html';
+              </script>";
     }
-    exit;
+
+    $stmt->close();
+    $conn->close();
 }
 ?>

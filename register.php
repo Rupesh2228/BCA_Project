@@ -1,43 +1,41 @@
 <?php
 include 'connection.php';
 
-// Check if form submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $fullName  = $_POST['fullName'];
     $email     = $_POST['email'];
     $phone     = $_POST['phone'];
+    $age       = (int)$_POST['age']; // cast to integer for safety
     $eventType = $_POST['eventType'];
     $address   = $_POST['address'];
     $comments  = $_POST['comments'];
 
-    $sql = "INSERT INTO registrations 
-            (fullName, email, phone, eventType, address, comments)
-            VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO event_bookings 
+            (full_name, email, phone, age, event_type, address, comments) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssss", 
-        $fullName, 
-        $email, 
-        $phone, 
-        $eventType, 
-        $address, 
-        $comments
+
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    // bind_param types: s = string, i = integer
+    $stmt->bind_param("sssisss",
+        $fullName, $email, $phone, $age, $eventType, $address, $comments
     );
 
     if ($stmt->execute()) {
         echo "<script>
-                alert('🎉 Registration Successful!');
-                window.location.href='Register.html';
+                alert('🎉 Booking Successful!');
+                window.location.href='landingpage.html';
               </script>";
     } else {
-        echo "Error: " . $stmt->error;
+        echo "Execute Error: " . $stmt->error;
     }
 
     $stmt->close();
+    $conn->close();
 }
-
-$conn->close();
-?>
-
 ?>

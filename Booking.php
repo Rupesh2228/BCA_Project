@@ -1,36 +1,42 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+include 'connection.php';
 
-// Connect to MySQL
-$conn = new mysqli("localhost", "root", "", "event_db");
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// Form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $fullName = trim($_POST['fullName']);
+    $email    = trim($_POST['email']);
+    $phone    = trim($_POST['phone']);
+    $whatsapp = trim($_POST['whatsapp']);
+    $eventType= trim($_POST['eventType']);
 
-// Only handle POST requests
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $fullName = $_POST['fullName'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $eventType = $_POST['eventType'] ?? '';
+    // Simple validation
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        die("Invalid email format");
+    }
 
-    // Prepared statement for safety
-    $stmt = $conn->prepare("INSERT INTO bookings (fullName, email, eventType) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $fullName, $email, $eventType);
+    if (!preg_match("/^[+0-9]{10,15}$/", $phone)) {
+        die("Invalid phone number format");
+    }
+
+    if (!preg_match("/^[+0-9]{10,15}$/", $whatsapp)) {
+        die("Invalid WhatsApp number format");
+    }
+
+    if (empty($eventType)) {
+        die("Please select an event");
+    }
+
+    // Prepare statement
+    $stmt = $conn->prepare("INSERT INTO bookings (fullName, email, phone, whatsapp, eventType) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $fullName, $email, $phone, $whatsapp, $eventType);
 
     if ($stmt->execute()) {
-        echo "Registration successful!<br>";
-        echo "Name: " . htmlspecialchars($fullName) . "<br>";
-        echo "Email: " . htmlspecialchars($email) . "<br>";
-        echo "Event: " . htmlspecialchars($eventType);
+        echo "<script>alert('Registration successful!'); window.location='landingpage.html';</script>";
     } else {
         echo "Error: " . $stmt->error;
     }
 
     $stmt->close();
-} else {
-    echo "Please submit the form first!";
 }
 
 $conn->close();
