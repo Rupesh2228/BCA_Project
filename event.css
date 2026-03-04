@@ -109,10 +109,12 @@ p{
   text-decoration: none;
   font-weight: 600;
   transition: 0.3s;
+ 
 }
 
 .btn:hover{
   background: #14a914;
+   height: 400px;
 }
 
 /* Footer */
@@ -127,7 +129,10 @@ p{
 .social{
   margin-bottom: 10px;
 }
-
+.last_buy_ticket{
+  text-align: center;
+  height: 200px;
+}
 .social a{
   color: #fff;
   font-size: 22px;

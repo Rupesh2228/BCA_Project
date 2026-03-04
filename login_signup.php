@@ -1,74 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
   <meta charset="UTF-8">
-  <title>Modern Login & Signup Form</title>
+  <title>Login & Signup Form</title>
   <style>
-    body {margin:0; padding:0; display:flex; justify-content:center; align-items:center; min-height:100vh; font-family:'Jost',sans-serif; background:linear-gradient(to bottom,#0f0c29,#302b63,#24243e);}
-    .main {width:350px; height:500px; background:#24243e; border-radius:10px; box-shadow:5px 20px 50px #000; overflow:hidden; position:relative; text-align:center;}
-    #chk { display:none; }
-    .signup, .login { position:relative; width:100%; height:100%; }
-    label { color:#fff; font-size:2.3em; justify-content:center; display:flex; margin:50px; font-weight:bold; cursor:pointer; transition:.5s ease-in-out; }
-    input { width:60%; background:#e0dede; display:flex; margin:20px auto; padding:12px; border:none; outline:none; border-radius:5px; }
-    button { width:60%; height:40px; margin:10px auto; display:block; color:#fff; background:#573b8a; font-size:1em; font-weight:bold; margin-top:30px; border:none; border-radius:5px; cursor:pointer; transition:.2s ease-in; }
-    button:hover { background:#6d44b8; }
-    .login { height:460px; background:#eee; border-radius:60%/10%; transform:translateY(-180px); transition:.8s ease-in-out; }
-    .login label { color:#573b8a; transform:scale(.6); }
-    #chk:checked ~ .login { transform:translateY(-500px); }
-    #chk:checked ~ .login label { transform:scale(1); }
-    #chk:checked ~ .signup label { transform:scale(.6); }
-    .arrow { padding-right: 280px; margin-bottom:-40px; }
-    .arrow a { text-decoration:none; color:#fff; font-weight:bold; }
+    body {
+      margin:0;
+      padding:0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+      font-family:'Jost',sans-serif;
+      background:linear-gradient(to bottom,#0f0c29,#302b63,#24243e);
+    }
+
+    .main {
+      width:350px;
+      background:#24243e;
+      border-radius:10px;
+      box-shadow:5px 20px 50px #000;
+      overflow:hidden;
+      text-align:center;
+      position:relative;
+    }
+
+    .arrow {
+      position:absolute;
+      top:10px;
+      left:10px;
+      font-size:1.2em;
+      z-index:3;
+    }
+
+    .arrow a {
+      text-decoration:none;
+      color:#fff;
+      font-weight:bold;
+    }
+
+    .tabs {
+      display:flex;
+      justify-content:space-around;
+      background:#302b63;
+      margin-top:40px; /* space for arrow */
+    }
+
+    .tabs button {
+      flex:1;
+      padding:15px 0;
+      font-size:1.2em;
+      font-weight:bold;
+      color:#fff;
+      background:#302b63;
+      border:none;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .tabs button.active {
+      background:#573b8a;
+    }
+
+    .form-container {
+      padding:30px 0;
+      background:#24243e;
+    }
+
+    .form-container form {
+      display:none;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .form-container form.active {
+      display:flex;
+    }
+
+    input {
+      width:70%;
+      background:#e0dede;
+      margin:10px 0;
+      padding:12px;
+      border:none;
+      outline:none;
+      border-radius:5px;
+    }
+
+    button.submit-btn {
+      width:70%;
+      height:40px;
+      margin-top:20px;
+      color:#fff;
+      background:#573b8a;
+      font-size:1em;
+      font-weight:bold;
+      border:none;
+      border-radius:5px;
+      cursor:pointer;
+      transition:.2s ease-in;
+    }
+
+    button.submit-btn:hover {
+      background:#6d44b8;
+    }
+
   </style>
 </head>
 <body>
   <div class="main">
-    <input type="checkbox" id="chk" aria-hidden="true">
-
+    <!-- Back Arrow -->
     <div class="arrow">
-      <a href="#">← Back</a>
+      <a href="landingpage.html">←</a>
     </div>
 
-    <!-- Signup Form -->
-    <div class="signup">
-      <form method="post" action="signup.php">
-        <label for="chk" aria-hidden="true">Sign up</label>
-        <input type="text" name="txt" placeholder="User name" required>
+    <!-- Tabs -->
+    <div class="tabs">
+      <button id="loginTab" class="active">Login</button>
+      <button id="signupTab">Sign Up</button>
+    </div>
+
+    <div class="form-container">
+      <!-- Login Form -->
+      <form id="loginForm" class="active" method="post" action="login.php">
         <input type="email" name="email" placeholder="Email" required>
         <input type="password" name="pswd" placeholder="Password" required>
-        <button type="submit">Sign up</button>
+        <button type="submit" class="submit-btn">Login</button>
       </form>
-    </div>
 
-    <!-- Login Form -->
-    <div class="login">
-      <form method="post" action="login.php">
-        <label for="chk" aria-hidden="true">Login</label>
+      <!-- Signup Form -->
+      <form id="signupForm" method="post" action="signup.php">
+        <input type="text" name="name" placeholder="User name" required>
         <input type="email" name="email" placeholder="Email" required>
         <input type="password" name="pswd" placeholder="Password" required>
-        <button type="submit">Login</button>
+        <button type="submit" class="submit-btn">Sign Up</button>
       </form>
     </div>
   </div>
 
+  <script>
+    const loginTab = document.getElementById('loginTab');
+    const signupTab = document.getElementById('signupTab');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+
+    loginTab.addEventListener('click', () => {
+      loginTab.classList.add('active');
+      signupTab.classList.remove('active');
+      loginForm.classList.add('active');
+      signupForm.classList.remove('active');
+    });
+
+    signupTab.addEventListener('click', () => {
+      signupTab.classList.add('active');
+      loginTab.classList.remove('active');
+      signupForm.classList.add('active');
+      loginForm.classList.remove('active');
+    });
+  </script>
+
+  <!-- PHP Status Alert -->
   <?php if (!empty($_GET['status'])): ?>
-    <script>
-      <?php if ($_GET['status'] === 'signup_success'): ?>
-        alert("Signup successful! Redirecting to dashboard...");
-        window.location.href = "dashboard.php";
-      <?php elseif ($_GET['status'] === 'login_success'): ?>
-        alert("Login successful! Redirecting to dashboard...");
-        window.location.href = "dashboard.php";
-      <?php elseif ($_GET['status'] === 'wrong_password'): ?>
-        alert("Invalid password. Please try again.");
-      <?php elseif ($_GET['status'] === 'no_user'): ?>
-        alert("No user found with that email.");
-      <?php elseif ($_GET['status'] === 'exists'): ?>
-        alert("Email already registered. Please log in.");
-      <?php elseif ($_GET['status'] === 'error'): ?>
-        alert("Something went wrong. Please try again.");
-      <?php endif; ?>
-    </script>
+  <script>
+    let message = "";
+    let redirectUrl = "landingpage.html"; // redirect after OK
+
+    switch ("<?= $_GET['status'] ?>") {
+      case "signup_success":
+        message = "🎉 Signup successful! Click OK to continue.";
+        break;
+      case "login_success":
+        message = "✅ Login successful! Click OK to continue.";
+        break;
+      case "wrong_password":
+        message = "❌ Invalid password. Please try again.";
+        break;
+      case "no_user":
+        message = "❌ No user found with that email.";
+        break;
+      case "exists":
+        message = "⚠️ Email already registered. Please log in.";
+        break;
+      case "error":
+        message = "⚠️ Something went wrong. Please try again.";
+        break;
+    }
+
+    if (message !== "") {
+      alert(message);
+      window.location.href = redirectUrl;
+    }
+  </script>
   <?php endif; ?>
 </body>
 </html>

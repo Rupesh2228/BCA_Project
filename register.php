@@ -1,41 +1,57 @@
 <?php
+session_start();
 include 'connection.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if(!isset($_SESSION['user_id'])){
+    header("Location: login_signup.php");
+    exit;
+}
 
-    $fullName  = $_POST['fullName'];
-    $email     = $_POST['email'];
-    $phone     = $_POST['phone'];
-    $age       = (int)$_POST['age']; // cast to integer for safety
-    $eventType = $_POST['eventType'];
-    $address   = $_POST['address'];
-    $comments  = $_POST['comments'];
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['book'])) {
 
-    $sql = "INSERT INTO event_bookings 
-            (full_name, email, phone, age, event_type, address, comments) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $user_id = $_SESSION['user_id'];
+    $fullName = trim($_POST['fullName']);
+    $email = trim($_POST['email']);
+    $phone = trim($_POST['phone']);
+    $age = (int)$_POST['age'];
+    $price = (int)$_POST['price'];
 
-    $stmt = $conn->prepare($sql);
+    // Event info from index
+    $events = [
+        ['name'=>'Music Fest 2026', 'date'=>'2026-02-21', 'price'=>1299],
+        ['name'=>'DJ Night Party', 'date'=>'2026-03-05', 'price'=>999],
+        ['name'=>'Food Carnival', 'date'=>'2026-04-10', 'price'=>799]
+    ];
 
-    if (!$stmt) {
-        die("Prepare failed: " . $conn->error);
+    $event_index = (int)$_POST['event_index'];
+    if(!isset($events[$event_index])){
+        die("Invalid event selected");
     }
 
-    // bind_param types: s = string, i = integer
-    $stmt->bind_param("sssisss",
-        $fullName, $email, $phone, $age, $eventType, $address, $comments
+    $event_name = $events[$event_index]['name'];
+    $event_date = $events[$event_index]['date'];
+
+    $ticket_code = "TKT-" . strtoupper(uniqid());
+
+    $stmt = $conn->prepare("INSERT INTO event_tickets
+        (user_id, full_name, email, phone, age, event_name, event_date, price, ticket_code)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+    $stmt->bind_param("isssissis",
+        $user_id, $fullName, $email, $phone, $age, $event_name, $event_date, $price, $ticket_code
     );
 
-    if ($stmt->execute()) {
+  if($stmt->execute()){
+    echo "<script>
+            alert('🎉 Booking Successful! Your ticket has been generated.');
+            window.location.href='dashboard.php';
+          </script>";
+    exit;
+}else {
         echo "<script>
-                alert('🎉 Booking Successful!');
-                window.location.href='landingpage.html';
+                alert('Error: Could not complete booking. Please try again.');
+                window.location.href='register.php';
               </script>";
-    } else {
-        echo "Execute Error: " . $stmt->error;
     }
-
-    $stmt->close();
-    $conn->close();
 }
 ?>

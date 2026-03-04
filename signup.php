@@ -2,41 +2,53 @@
 session_start();
 include 'connection.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = trim($_POST['email']);
-    $password = trim($_POST['pswd']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Check if user exists
-    $stmt = $conn->prepare("SELECT id, password FROM users WHERE email=?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $stmt->store_result();
+    $username = trim($_POST['name'] ?? '');
+    $email    = trim($_POST['email'] ?? '');
+    $password = trim($_POST['pswd'] ?? '');
 
-    if ($stmt->num_rows == 0) {
-        echo "<script>
-                alert('No user found with that email.');
-                window.location.href='landingpage.html';
-              </script>";
+    if (empty($username) || empty($email) || empty($password)) {
+        header("Location: landingpage.html?status=error_empty");
         exit;
     }
 
-    $stmt->bind_result($id, $hashedPassword);
-    $stmt->fetch();
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        header("Location: landingpage.html?status=error_invalid_email");
+        exit;
+    }
 
-    if (password_verify($password, $hashedPassword)) {
-        $_SESSION['user_id'] = $id;
-        echo "<script>
-                alert('Login successful! Redirecting to landing page...');
-                window.location.href='landingpage.html';
-              </script>";
+    if (strlen($password) < 6) {
+        header("Location: landingpage.html?status=error_short_password");
+        exit;
+    }
+
+    // Check if email exists
+    $check = $conn->prepare("SELECT id FROM users WHERE email = ?");
+    $check->bind_param("s", $email);
+    $check->execute();
+    $check->store_result();
+
+    if ($check->num_rows > 0) {
+        header("Location: landingpage.html?status=exists");
+        exit;
+    }
+
+    $hashed = password_hash($password, PASSWORD_DEFAULT);
+
+    // Insert user
+    $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $username, $email, $hashed);
+
+    if ($stmt->execute()) {
+        // ✅ Redirect with a friendly success message
+        header("Location: landingpage.html?status=signup_success&msg=" . urlencode("Signup successful! Welcome, $username!"));
     } else {
-        echo "<script>
-                alert('Invalid password. Please try again.');
-                window.location.href='landingpage.html';
-              </script>";
+        header("Location: landingpage.html?status=error_insert");
     }
 
     $stmt->close();
+    $check->close();
     $conn->close();
 }
 ?>

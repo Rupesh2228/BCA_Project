@@ -1,174 +1,262 @@
-*{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
 
-body{
-  background: linear-gradient(to right, #e2e2e2, #c9d6ff, #a1c4fd);
-}
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
 
-.header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 60px;
-}
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f9fafb; /* Very light gray for clean look */
+        color: #333;
+        line-height: 1.6;
+      }
 
-.logo h1{
-  font-family: 'Courier New', monospace;
-  font-size: 2em;
-  font-weight: bold;
-  color: #767aa8;
-}
+      h1, h2, h3, h4 {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+      }
 
+      a {
+        text-decoration: none;
+        color: inherit;
+        transition: 0.3s;
+      }
 
-nav a{
-  color: #0d3466;
-  text-decoration: none;
-  margin-left: 25px;
-  position: relative;
-  font-size: 20px;
-}
+      /* --- HEADER --- */
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 5%;
+        background: #fff;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
 
+      .logo h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5rem;
+        color: #1a252f; /* Dark Navy */
+        letter-spacing: 1px;
+      }
 
-nav a::after{
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -5px;
-  width: 0;
-  height: 2px;
-  background-color: #0d3466;
-  transition: 0.4s;
-}
+      .nav-links {
+        display: flex;
+        gap: 25px;
+      }
 
-nav a:hover::after{
-  width: 100%;
-}
-.link{
-    padding-left: 780px;
-    margin-top: -70px;
-}
-.logo a{
-    text-decoration: none;
-   }
-   .logo{
-    padding-top: 10px;
-   }
-   main{
-    padding-top: 20px;
-   }
+      .nav-links a {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #555;
+        position: relative;
+      }
 
-   .maindiv{
-    margin-top: -360px;
-    margin-left: 350px;
-   }
-   .Nepal{
-    color: black;
-   }
-   section{
-    height: 400px;
-    width: 100%;
-    background-color: blue;
-    margin-top: 235px;
-   
-   }
-   .height{
-    color: white;
-     }
+      .nav-links a:hover {
+        color: #d4af37; /* Gold Accent */
+      }
 
-     .your{
-        font-size: 50px;
-     }
-     .that{
-      width: 50%;
-      color: white;
-      font-family: Courier, monospace;
-     }
-     .up{
-      padding-top: 40px;
-     }
-     .main_class{
-      padding-left: 65%;
-      margin-top: -415px;
-     }
-     .sidebar_us{
-      color: aliceblue;
-      font-size: 45px;
-     }
-     .button_sidebar button a{
-      text-decoration: none;
-      color: black;
-      font-size: 40px;
-     }
-     .button_sidebar_inside {
-    border-radius: 15px;  
-    border-color: whitesmoke; 
-    font-size: 18px;       
-    height: 50px; 
-    width: 130px;    
-       
-}
+      /* --- HERO SECTION --- */
+      .hero-container {
+        position: relative;
+        width: 100%;
+        height: 80vh; /* Takes up 80% of screen height */
+        min-height: 500px;
+        overflow: hidden;
+      }
 
-     .more_class{
-      height: 30px;
-     }
-     .button_sidebar_inside:hover{
-      cursor: pointer;
-      background-color: hotpink;
-      border-color: hotpink;
-      transition: background-color 0.5s;
-     }
-     .button_sidebar{
-      padding-top: 10px;
-      padding-left: 140px;
-     }
-     article{
-      background-color: blue;
-      height: 400px;
-      width: 100%;
-      margin-top: 315px;
-     }
-  
-     .As_a{
-      width: 50%;
-      padding-top: 20px;
-     }
-     .gallery-item-photo{
-      padding-left: 910px;
-      margin-top: -290px;
-     }
-     .asricle_class{
-      font-family: 'Courier New', monospace;
-  font-size: 18px;
-  font-weight: bold;
-  color: whitesmoke;
-  
-     }
+      .hero-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
 
-     .button_read:hover{
-      cursor: pointer;
-      background-color: hotpink;
-      border-color: hotpink;
-      transition: background-color 0.5s;
-          }
-          .button_read{
-            border-radius: 15px;  
-    border-color: whitesmoke; 
-    font-size: 18px;       
-    height: 50px; 
-    width: 130px;
-          }
-          .move_button{
-            margin-top: 50px;
-          }
-             footer{
-      background-color: blue;
-      height: 50px;
-      width: 100%;
-      margin-top: 15px;
-     }
-     footer h1{
-      padding-left: 35%;
-     }
+      /* Dark Overlay to make text pop */
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(26, 37, 47, 0.3), rgba(26, 37, 47, 0.7));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .maindiv {
+        color: #fff;
+        max-width: 800px;
+        z-index: 2;
+      }
+
+      .Nepal {
+        font-size: clamp(2rem, 5vw, 4rem);
+        line-height: 1.2;
+        margin-bottom: 15px;
+        text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+      }
+
+      .Nepal small {
+        display: block;
+        font-family: 'Poppins', sans-serif;
+        font-size: clamp(1rem, 2vw, 1.3rem);
+        font-weight: 300;
+        margin-top: 10px;
+        opacity: 0.9;
+      }
+
+      /* --- SECTIONS COMMON --- */
+      .section-padding {
+        padding: 80px 5%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* --- DEDICATION SECTION (Blue Section) --- */
+      .dedication-section {
+        background-color: #1a252f; /* Dark Navy */
+        color: #fff;
+        text-align: center;
+        padding: 80px 20px;
+      }
+
+      .your {
+        font-size: clamp(1.8rem, 4vw, 3rem);
+        margin-bottom: 20px;
+        color: #d4af37; /* Gold */
+      }
+
+      .that {
+        max-width: 700px;
+        margin: 0 auto;
+        font-size: 1.1rem;
+        font-weight: 300;
+        color: #e0e0e0;
+      }
+
+      /* --- CALL TO ACTION (Card Style) --- */
+      .cta-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        margin: 50px 5%;
+        padding: 60px 20px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        text-align: center;
+      }
+
+      .sidebar_us {
+        font-size: 2rem;
+        color: #1a252f;
+        margin-bottom: 20px;
+      }
+
+      .btn-primary {
+        background-color: #d4af37;
+        color: #fff;
+        padding: 12px 30px;
+        border-radius: 30px;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+      }
+
+      .btn-primary:hover {
+        background-color: #b5952f;
+        transform: translateY(-2px);
+      }
+
+      /* --- ABOUT / ARTICLE SECTION --- */
+      .about-section {
+        background-color: #f4f7f6;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 50px;
+        padding: 80px 5%;
+      }
+
+      .about-text {
+        flex: 1;
+        min-width: 300px;
+        max-width: 600px;
+      }
+
+      .committed {
+        font-size: 2.5rem;
+        color: #1a252f;
+        margin-bottom: 20px;
+      }
+
+      .As_a {
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 25px;
+        text-align: justify;
+      }
+
+      .about-image {
+        flex: 1;
+        min-width: 300px;
+        max-width: 500px;
+      }
+
+      .about-image img {
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        background-color: #1a252f;
+        color: #fff;
+        text-align: center;
+        padding: 40px 20px;
+      }
+
+      footer p {
+        opacity: 0.7;
+        font-size: 0.9rem;
+      }
+
+      /* --- MOBILE TWEAKS --- */
+      @media (max-width: 768px) {
+        .header {
+          flex-direction: column;
+          gap: 15px;
+        }
+        
+        .nav-links {
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 15px;
+        }
+        
+        .hero-container {
+          height: 60vh;
+        }
+
+        .about-section {
+          flex-direction: column;
+          text-align: center;
+        }
+        
+        .As_a {
+          text-align: center;
+        }
+      }
+

@@ -3,92 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="project.css">
-    <link rel="stylesheet" href="about.css">
+    <title>EventHub || about</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- RESET & BASICS --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9fafb;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: #1a252f;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- HEADER --- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: #fff;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo img {
+            height: 80px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #555;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d4af37;
+        }
+
+        /* --- HERO SECTION --- */
+        .about-hero {
+            background-color: #1a252f;
+            color: white;
+            padding: 60px 5%;
+            text-align: center;
+        }
+
+        .about-hero h1 {
+            color: #d4af37;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 20px;
+        }
+
+        .about-hero p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #e0e0e0;
+        }
+
+        /* --- MAIN CONTENT LAYOUT --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 5%;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #1a252f;
+        }
+
+        .about-text p {
+            color: #555;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* --- SECTIONS (Why Choose Us & Partner) --- */
+        .info-section {
+            background-color: #fff;
+            padding: 60px 5%;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .info-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #1a252f;
+        }
+
+        .info-content p {
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* --- CTA BUTTON --- */
+        .cta-container {
+            text-align: center;
+            padding: 40px 0 60px 0;
+        }
+
+        .btn-primary {
+            background-color: #d4af37;
+            color: #fff;
+            padding: 14px 35px;
+            border-radius: 30px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary:hover {
+            background-color: #b5952f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #1a252f;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-  <div class="logo">
-       <a href="landingpage.html"> <h1 class="company_name" style="font-family: 'Courier New', monospace; font-size: 2em; font-weight: bold;color: #767aa8;"><img src="logo.png" alt="TUC" height="100px
-        " width="100px"></h1></a>
-      
-  </div>
-   <nav class="playfair-display">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <div class="link">
-     
-            <a href="landingpage.html">Home</a>
-        <a href="Booking.html">Event Booking</a>
-        <a href="login_signup.php">Login</a>
-        <!-- <a href="Register.html">Register Event</a> -->
-        <!-- <a href="Gallery.html">Gallery</a> -->
-        <a href="Event.html">Event</a>
-           <a href="about.html">About Us</a>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <a href="landingpage.html">EventHub</a>
+        </div>
+        <nav>
+            <div class="nav-links">
+                  <a href="landingpage.html">Home</a>
+          <a href="Booking.html">Event Booking</a>
+          <a href="login_signup.php">Login</a>
+          <a href="Event.html">Register Event</a>
+          <a href="dashboard.php">Profile</a>
+                <a href="about.html" style="color: #d4af37;">About Us</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <h1>Trusted Event Planner in Nepal</h1>
+        <p>We turn your vision into reality with professionalism and precision.</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="about-grid">
+            <!-- Text Side -->
+            <div class="about-text">
+                <h2>Who We Are</h2>
+                <p>
+                    <strong>Team Up & Collaboration Advertising & Event Management</strong>, established in 1999, is a well-known event management agency in Nepal. With over 25 years of experience in the industry, we have perfectly managed a number of events in Nepal.
+                </p>
+                <p>
+                    Team Up & Collaboration has established its reputation for executing well-planned and prosperous events due to its professionalism, innovations, and coordination. We believe that every detail matters.
+                </p>
+            </div>
+            
+            <!-- Image Side -->
+            <div class="about-image">
+                <img src="Legends Lunch at Grand Hyatt.jpg" alt="Event Management Team">
+            </div>
+        </div>
     </div>
-   </nav>
-   </header>
-<div class="main">
-    <div class="first_about">
-        <h1 class="Trusted">
-            Trusted Event Planner in Nepal
-        </h1>
-        <h2 class="est">Team Up & Collaboration Advertising & Event Management", established in 1999, is a well-known event management agency in Nepal. With over 2 years of experience in the industry, he has perfectly managed a number of events in Nepal. "Team Up & Collaboration" has established its reputation for executing well-planned and prosperous events due to its professionalism, innovations and coordination.
 
-</h2>
-    <div class="gallery-item-about">
-  <a target="_blank" href="Legends Lunch at Grand Hyatt.jpg">
-    <img src="Legends Lunch at Grand Hyatt.jpg" alt="Forest" width="425" height="300">
-  </a>
-  
-</div>
-    </div>
-</div>
+    <!-- Why Choose Us -->
+    <section class="info-section">
+        <div class="info-content">
+            <h2>Why Choose Us?</h2>
+            <p>
+                In team-up and collaboration, attention to detail is our hallmark. We offer comprehensive in-house services, including advanced audiovisual systems, professional lighting, performance solutions, interpreting services, and custom event applications. This enables us to maintain strict quality standards while offering cost-effective solutions to our customers. Our dedicated technical and event management teams work together to deliver a smooth and seamless event experience, always keeping your vision and budget in mind.
+            </p>
+        </div>
+    </section>
 
-<div class="article_about">
-        <div class="gallery-item-about-second">
-  <a target="_blank" href="Legends Lunch at Grand Hyatt.jpg">
-    <img src="Legends Lunch at Grand Hyatt.jpg" alt="Forest" width="425" height="420">
-  </a>
-  
-</div>
-<div class="class_why">
-    <div class="art_why">
-        <h1>Why Choose Us?</h1>
-    </div>
-    <div class="class_intro_why">
-        <h1>
-            In team-up and collaboration, attention to detail is our hallmark. We offer comprehensive in-house services, including advanced audiovisual systems, professional lighting, performance solutions, interpreting services and custom event applications. This enables us to maintain strict quality standards while offering cost-effective solutions to our customers. Our dedicated technical and event management teams work together to deliver a smooth and seamless event experience, always keeping your vision and budget in mind.
+    <!-- Partner With Us -->
+    <section class="container">
+        <div class="info-content" style="margin-top: 40px;">
+            <h2>Partner with Team Up and Collaboration</h2>
+            <p>
+                As trusted event planners in Nepal, Team Up and Collaboration is dedicated to transforming your ideas into reality with professionalism, creativity, and precision. Get in touch with us today to begin planning your next successful event.
+            </p>
+        </div>
+        
+        <div class="cta-container">
+            <a href="landingpage.html"><button class="btn-primary">Read More</button></a>
+        </div>
+    </section>
 
+    <!-- Footer -->
+    <footer>
+        <h1>© 2025 Team Up and Collaboration.</h1>
+    </footer>
 
-        </h1>
-    </div>
-</div>
-<div class="class_Partner">
-    <div class="event_management">
-        <h1>Partner with Team up and Collaboration </h1>
-    </div>
-    <div class="event_adv_manag">
-        <h1>
-           As trusted event planners in Nepal, Team Up and Collaboration is dedicated to transforming your ideas into reality with professionalism, creativity, and precision. Get in touch with us today to begin planning your next successful event.
-        </h1>
-    </div>
-</div>
-
-
-
-</div>
-
-<div class="about_button">
-               <a href="login.html"><button class="button_about">Read More</button></a>
-</div>
-
-<div class="last_of_about">
-    <div class="footer_section">
-        <h1>© 2025 Team up and Collaboration.</h1>
-    </div>
-</div>
 </body>
 </html>
